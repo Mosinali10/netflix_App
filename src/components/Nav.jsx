@@ -1,48 +1,74 @@
 import { useState, useEffect } from 'react';
 import { Search, Bell, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Nav = ({ setSearchTerm }) => {
-    const [show, handleShow] = useState(false);
+  const [show, setShow] = useState(false);
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
 
-    const transitionNavBar = () => {
-        if (window.scrollY > 100) {
-            handleShow(true);
-        } else {
-            handleShow(false);
-        }
-    };
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
-    useEffect(() => {
-        window.addEventListener('scroll', transitionNavBar);
-        return () => window.removeEventListener('scroll', transitionNavBar);
-    }, []);
+  const transitionNavBar = () => {
+    if (window.scrollY > 100) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  };
 
-    return (
-        <nav className={`nav ${show && 'nav__black'}`}>
-            <div className="nav__contents">
-                <div className="nav__left">
-                    <h1 className="nav__logo">NETFLIX</h1>
-                    <ul className="nav__menu">
-                        <li>Home</li>
-                        <li>TV Shows</li>
-                        <li>Movies</li>
-                        <li>New & Popular</li>
-                        <li>My List</li>
-                    </ul>
-                </div>
+  useEffect(() => {
+    window.addEventListener('scroll', transitionNavBar);
+    return () => window.removeEventListener('scroll', transitionNavBar);
+  }, []);
 
-                <div className="nav__right">
-                    <Search className="nav__icon" size={20} />
-                    <span className="nav__kids">Kids</span>
-                    <Bell className="nav__icon" size={20} />
-                    <div className="nav__avatar">
-                        <User size={20} />
-                    </div>
-                </div>
+  return (
+    <nav className={`nav ${show && 'nav__black'}`}>
+      <div className="nav__contents">
+        <div className="nav__left">
+          <h1 className="nav__logo">NETFLIX</h1>
+          <ul className="nav__menu">
+            <li>Home</li>
+            <li>TV Shows</li>
+            <li>Movies</li>
+            <li>New & Popular</li>
+            <li>My List</li>
+          </ul>
+        </div>
+
+        <div className="nav__right">
+          <div className="nav__icons">
+            <div className="nav__search">
+              <Search className="search-icon" size={20} />
+              <input
+                type="text"
+                placeholder="Titles, people, genres"
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
+            <Bell size={20} />
+            <div className="nav__avatar-container">
+              <img
+                className="nav__avatar"
+                src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+                alt="User"
+              />
+              <div className="nav__dropdown">
+                <p>{user?.name}</p>
+                <hr />
+                <span onClick={handleLogout}>Sign out of Netflix</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <style dangerouslySetInnerHTML={{
-                __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .nav {
           position: fixed;
           top: 0;
@@ -100,6 +126,35 @@ const Nav = ({ setSearchTerm }) => {
           color: white;
           cursor: pointer;
         }
+        .nav__avatar {
+          width: 32px;
+          height: 32px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        .nav__avatar-container {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+        .nav__avatar-container:hover .nav__dropdown {
+          display: block;
+        }
+        .nav__dropdown {
+          display: none;
+          position: absolute;
+          top: 45px;
+          right: 0;
+          background: rgba(0,0,0,0.9);
+          min-width: 150px;
+          padding: 15px;
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 4px;
+        }
+        .nav__dropdown p { margin: 0 0 10px; font-size: 14px; color: white; }
+        .nav__dropdown hr { border: 0.5px solid rgba(255,255,255,0.1); margin: 10px 0; }
+        .nav__dropdown span { cursor: pointer; font-size: 13px; font-weight: 500; color: white; }
+        .nav__dropdown span:hover { text-decoration: underline; }
         .nav__kids {
           color: white;
           font-size: 0.85rem;
@@ -120,8 +175,8 @@ const Nav = ({ setSearchTerm }) => {
           .nav__menu { display: none; }
         }
       `}} />
-        </nav>
-    );
+    </nav>
+  );
 };
 
 export default Nav;
