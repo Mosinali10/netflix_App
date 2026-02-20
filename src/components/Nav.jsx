@@ -30,7 +30,8 @@ const Nav = ({ setSearchTerm }) => {
     <nav className={`nav ${show && 'nav__black'}`}>
       <div className="nav__contents">
         <div className="nav__left">
-          <h1 className="nav__logo">NETFLIX</h1>
+          <h1 className="nav__logo" onClick={() => navigate('/')}>NETFLIX <span style={{ fontSize: '0.8rem', color: 'white', verticalAlign: 'middle', background: '#e50914', padding: '2px 5px', borderRadius: '3px', marginLeft: '5px' }}>CLONE</span></h1>
+          <div className="nav__disclaimer">Demo Project (Non-Official)</div>
           <ul className="nav__menu">
             <li>Home</li>
             <li>TV Shows</li>
@@ -100,6 +101,18 @@ const Nav = ({ setSearchTerm }) => {
           font-weight: 800;
           font-size: 1.8rem;
           letter-spacing: -1px;
+          display: flex;
+          align-items: center;
+        }
+        .nav__disclaimer {
+          color: #737373;
+          font-size: 0.7rem;
+          border: 1px solid #737373;
+          padding: 2px 8px;
+          border-radius: 20px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          white-space: nowrap;
         }
         .nav__menu {
           display: flex;
@@ -120,22 +133,39 @@ const Nav = ({ setSearchTerm }) => {
         .nav__right {
           display: flex;
           align-items: center;
-          gap: 20px;
         }
-        .nav__icon {
+        .nav__icons {
+          display: flex;
+          align-items: center;
+          gap: 25px;
           color: white;
-          cursor: pointer;
         }
-        .nav__avatar {
-          width: 32px;
-          height: 32px;
+        .nav__search {
+          display: flex;
+          align-items: center;
+          background: rgba(0,0,0,0.75);
+          border: 1px solid rgba(255,255,255,0.3);
+          padding: 5px 10px;
           border-radius: 4px;
-          cursor: pointer;
+        }
+        .nav__search input {
+          background: transparent;
+          border: none;
+          color: white;
+          margin-left: 10px;
+          outline: none;
+          width: 0;
+          transition: width 0.3s;
+        }
+        .nav__search:focus-within input,
+        .nav__search:hover input {
+          width: 200px;
         }
         .nav__avatar-container {
           position: relative;
           display: flex;
           align-items: center;
+          cursor: pointer;
         }
         .nav__avatar-container:hover .nav__dropdown {
           display: block;
@@ -155,24 +185,17 @@ const Nav = ({ setSearchTerm }) => {
         .nav__dropdown hr { border: 0.5px solid rgba(255,255,255,0.1); margin: 10px 0; }
         .nav__dropdown span { cursor: pointer; font-size: 13px; font-weight: 500; color: white; }
         .nav__dropdown span:hover { text-decoration: underline; }
-        .nav__kids {
-          color: white;
-          font-size: 0.85rem;
-          cursor: pointer;
-        }
         .nav__avatar {
           width: 32px;
           height: 32px;
-          background: #333;
           border-radius: 4px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
           cursor: pointer;
+          object-fit: cover;
         }
 
         @media (max-width: 768px) {
           .nav__menu { display: none; }
+          .nav__search input { width: 100px; }
         }
       `}} />
     </nav>
