@@ -30,8 +30,7 @@ const Nav = ({ setSearchTerm }) => {
     <nav className={`nav ${show && 'nav__black'}`}>
       <div className="nav__contents">
         <div className="nav__left">
-          <h1 className="nav__logo" onClick={() => navigate('/')}>NETFLIX <span style={{ fontSize: '0.8rem', color: 'white', verticalAlign: 'middle', background: '#e50914', padding: '2px 5px', borderRadius: '3px', marginLeft: '5px' }}>CLONE</span></h1>
-          <div className="nav__disclaimer">Demo Project (Non-Official)</div>
+          <h1 className="nav__logo" onClick={() => navigate('/')}>NETFLIX</h1>
           <ul className="nav__menu">
             <li>Home</li>
             <li>TV Shows</li>
@@ -103,16 +102,6 @@ const Nav = ({ setSearchTerm }) => {
           letter-spacing: -1px;
           display: flex;
           align-items: center;
-        }
-        .nav__disclaimer {
-          color: #737373;
-          font-size: 0.7rem;
-          border: 1px solid #737373;
-          padding: 2px 8px;
-          border-radius: 20px;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          white-space: nowrap;
         }
         .nav__menu {
           display: flex;

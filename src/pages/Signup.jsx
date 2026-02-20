@@ -3,71 +3,69 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Signup = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const { signup } = useAuth();
-    const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { signup } = useAuth();
+  const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
-        const res = await signup(name, email, password);
-        if (res.success) {
-            navigate('/');
-        } else {
-            setError(res.error);
-        }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    const res = await signup(name, email, password);
+    if (res.success) {
+      navigate('/');
+    } else {
+      setError(res.error);
+    }
+  };
 
-    return (
-        <div className="login-page">
-            <div className="login-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" />
-            </div>
-            <div className="login-container">
-                <div className="demo-badge">EDUCATIONAL CLONE</div>
-                <h1>Sign Up</h1>
-                <p className="demo-warning">NOTICE: This is a <strong>non-official</strong> demonstration project. Information entered is stored in a private development database.</p>
+  return (
+    <div className="login-page">
+      <div className="login-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" />
+      </div>
+      <div className="login-container">
+        <h1>Sign Up</h1>
 
-                {error && <div className="auth-error">{error}</div>}
+        {error && <div className="auth-error">{error}</div>}
 
-                <form onSubmit={handleSubmit} className="login-form">
-                    <input
-                        type="text"
-                        placeholder="Full Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        className="login-input"
-                    />
-                    <input
-                        type="email"
-                        placeholder="Email address"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="login-input"
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        className="login-input"
-                    />
-                    <button type="submit" className="login-button">Sign Up</button>
-                </form>
+        <form onSubmit={handleSubmit} className="login-form">
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="login-input"
+          />
+          <input
+            type="email"
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="login-input"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="login-input"
+          />
+          <button type="submit" className="login-button">Sign Up</button>
+        </form>
 
-                <div className="login-help">
-                    <span>Already have an account?</span> <Link to="/login">Sign in now.</Link>
-                </div>
-            </div>
+        <div className="login-help">
+          <span>Already have an account?</span> <Link to="/login">Sign in now.</Link>
+        </div>
+      </div>
 
-            <style dangerouslySetInnerHTML={{
-                __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         * { box-sizing: border-box; }
         .login-page {
           height: 100vh;
@@ -102,8 +100,6 @@ const Signup = () => {
           flex-direction: column;
         }
         .login-container h1 { color: white; margin: 0 0 28px; font-size: 32px; font-weight: 700; }
-        .demo-badge { background: #e50914; color: white; padding: 4px 10px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; display: inline-block; align-self: flex-start; margin-bottom: 15px; }
-        .demo-warning { color: #8c8c8c; font-size: 0.85rem; margin-bottom: 25px; line-height: 1.4; border-left: 3px solid #e50914; padding-left: 12px; }
         .auth-error { background: #e87c03; border-radius: 4px; color: white; padding: 10px 20px; margin-bottom: 16px; font-size: 14px; }
         
         .login-form {
@@ -151,8 +147,8 @@ const Signup = () => {
         .login-help a { text-decoration: none; color: white; transition: 0.2s; }
         .login-help a:hover { text-decoration: underline; }
       `}} />
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Signup;

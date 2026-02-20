@@ -26,9 +26,7 @@ const Login = () => {
         <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" />
       </div>
       <div className="login-container">
-        <div className="demo-badge">EDUCATIONAL CLONE</div>
         <h1>Sign In</h1>
-        <p className="demo-warning">NOTICE: This is a <strong>non-official</strong> demonstration project. Do not use your real Netflix credentials.</p>
 
         {error && <div className="auth-error">{error}</div>}
 
@@ -93,8 +91,6 @@ const Login = () => {
           flex-direction: column;
         }
         .login-container h1 { color: white; margin: 0 0 28px; font-size: 32px; font-weight: 700; }
-        .demo-badge { background: #e50914; color: white; padding: 4px 10px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; display: inline-block; align-self: flex-start; margin-bottom: 15px; }
-        .demo-warning { color: #8c8c8c; font-size: 0.85rem; margin-bottom: 25px; line-height: 1.4; border-left: 3px solid #e50914; padding-left: 12px; }
         .auth-error { background: #e87c03; border-radius: 4px; color: white; padding: 10px 20px; margin-bottom: 16px; font-size: 14px; }
         
         .login-form {
